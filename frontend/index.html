@@ -1,97 +1,251 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="description" content="Discover restaurants, explore menus and order your favourite meals with MarketPlace.">
 
-  <title>MarketPlace</title>
+  <title>MarketPlace | Discover Great Food</title>
 
-  <link
-    rel="stylesheet"
-    href="styles.css"
-  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <h1>MarketPlace</h1>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a class="brand" href="#">
+        <span class="brand-mark">M</span>
+        <span>Market<span class="brand-accent">Place</span></span>
+      </a>
 
-  <section>
-    <h2>Backend Health</h2>
+      <nav class="main-nav">
+        <a href="#home" class="active">Home</a>
+        <a href="#restaurants-section">Restaurants</a>
+        <a href="#order-section">Order</a>
+      </nav>
 
-    <button onclick="checkHealth()">
-      Check Backend
-    </button>
+      <a href="#restaurants-section" class="nav-cta">Explore food <span>→</span></a>
+    </div>
+  </header>
 
-    <p id="health">
-      Not checked yet
-    </p>
-  </section>
+  <main>
 
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="eyebrow-dot"></span> GOOD FOOD, GOOD MOOD</span>
 
-  <section>
-    <h2>Restaurants</h2>
+          <h1>Discover food<br>that makes you <span>happy.</span></h1>
 
-    <button onclick="loadRestaurants()">
-      Load Restaurants
-    </button>
+          <p>
+            Explore great restaurants, discover delicious meals
+            and find your next favourite dish.
+          </p>
 
-    <div id="restaurants"></div>
-  </section>
+          <div class="hero-actions">
+            <a href="#restaurants-section" class="button button-primary">
+              Explore restaurants <span>→</span>
+            </a>
+            <a href="#order-section" class="button button-secondary">
+              Place an order
+            </a>
+          </div>
 
+          <div class="hero-note">
+            <span class="hero-note-icon">✦</span>
+            Discover. Choose. Enjoy.
+          </div>
+        </div>
 
-  <section>
-    <h2>Create Order</h2>
+        <div class="hero-image">
+          <img
+            src="assets/images/food/food-hero.webp"
+            alt="A selection of delicious meals"
+            onerror="this.src='assets/images/placeholders/food-placeholder.webp'"
+          >
+          <div class="image-caption">
+            <span class="caption-icon">✦</span>
+            <div>
+              <strong>Something delicious</strong>
+              <small>Your next meal starts here</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <label>
-      Restaurant ID:
-      <input
-        id="restaurantId"
-        type="number"
-      >
-    </label>
+    <!-- Benefits -->
+    <section class="benefits">
+      <div class="container benefits-grid">
+        <div class="benefit">
+          <span class="benefit-icon">⌕</span>
+          <div>
+            <strong>Discover</strong>
+            <small>Explore restaurants</small>
+          </div>
+        </div>
 
-    <br><br>
+        <div class="benefit">
+          <span class="benefit-icon">♡</span>
+          <div>
+            <strong>Choose</strong>
+            <small>Find your favourite meals</small>
+          </div>
+        </div>
 
-    <label>
-      Menu Item ID:
-      <input
-        id="menuItemId"
-        type="number"
-      >
-    </label>
+        <div class="benefit">
+          <span class="benefit-icon">✓</span>
+          <div>
+            <strong>Order</strong>
+            <small>Place your order easily</small>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <br><br>
+    <!-- Restaurants -->
+    <section class="section restaurants-section" id="restaurants-section">
+      <div class="container">
 
-    <label>
-      Quantity:
-      <input
-        id="quantity"
-        type="number"
-        value="1"
-        min="1"
-      >
-    </label>
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">EXPLORE THE COLLECTION</span>
+            <h2>Restaurants you'll love</h2>
+            <p>Find a restaurant and discover what's on the menu.</p>
+          </div>
 
-    <br><br>
+          <div class="health-indicator">
+            <span class="status-dot" id="health-dot"></span>
+            <span id="health">Checking service...</span>
+          </div>
+        </div>
 
-    <button onclick="createOrder()">
-      Create Order
-    </button>
+        <div class="restaurant-toolbar">
+          <div class="search-box">
+            <span>⌕</span>
+            <input
+              type="search"
+              id="restaurantSearch"
+              placeholder="Search restaurants..."
+              aria-label="Search restaurants"
+            >
+          </div>
 
-    <p id="orderResult"></p>
-  </section>
+          <button class="button button-outline" id="refreshRestaurants">
+            ↻ Refresh
+          </button>
+        </div>
 
+        <div id="restaurantMessage" class="message" aria-live="polite">
+          Loading restaurants...
+        </div>
+
+        <div id="restaurants" class="restaurant-grid"></div>
+
+      </div>
+    </section>
+
+    <!-- Ordering -->
+    <section class="section order-section" id="order-section">
+      <div class="container order-layout">
+
+        <div class="order-intro">
+          <span class="eyebrow">READY WHEN YOU ARE</span>
+          <h2>Your next favourite meal is just a few steps away.</h2>
+          <p>
+            Select a restaurant, choose a menu item and enter
+            your quantity to create an order.
+          </p>
+
+          <div class="order-steps">
+            <div><span>01</span> Select a restaurant</div>
+            <div><span>02</span> Choose a menu item</div>
+            <div><span>03</span> Submit your order</div>
+          </div>
+        </div>
+
+        <div class="order-card">
+          <div class="order-card-heading">
+            <span class="order-card-icon">✦</span>
+            <div>
+              <h3>Create your order</h3>
+              <p>Enter your order details below.</p>
+            </div>
+          </div>
+
+          <form id="orderForm">
+
+            <div class="form-group">
+              <label for="restaurantId">Restaurant ID</label>
+              <input
+                id="restaurantId"
+                name="restaurantId"
+                type="number"
+                min="1"
+                placeholder="Enter restaurant ID"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="menuItemId">Menu item ID</label>
+              <input
+                id="menuItemId"
+                name="menuItemId"
+                type="number"
+                min="1"
+                placeholder="Enter menu item ID"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input
+                id="quantity"
+                name="quantity"
+                type="number"
+                value="1"
+                min="1"
+                required
+              >
+            </div>
+
+            <button type="submit" class="button button-primary submit-button">
+              Create order <span>→</span>
+            </button>
+
+            <div id="orderResult" class="message" aria-live="polite"></div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <a class="brand footer-brand" href="#">
+        <span class="brand-mark">M</span>
+        <span>Market<span class="brand-accent">Place</span></span>
+      </a>
+
+      <p>Discover great food. Find your next favourite.</p>
+
+      <span class="footer-copy">© <span id="currentYear"></span> MarketPlace</span>
+    </div>
+  </footer>
 
   <script src="config.js"></script>
   <script src="app.js"></script>
 
 </body>
-
 </html>

@@ -1,4 +1,9 @@
-const API_BASE_URL =
-  "https://ideal-waffle-g6q6vpxv65p3vxj7-4000.app.github.dev";
+// API requests use the same origin as the website.
+// Nginx forwards /api and /health to the backend.
 
-window.API_BASE_URL = API_BASE_URL;
+window.API_BASE_URL = "";
+
+// Codespaces: use local image assets.
+// AWS: replace this with your S3 or CloudFront base URL.
+
+window.IMAGE_BASE_URL = "/assets/images";
