@@ -1,10 +1,11 @@
+
 FROM nginx:alpine
 
-# Copy frontend files into Nginx web root
-COPY index.html /usr/share/nginx/html/
-COPY app.js /usr/share/nginx/html/
-COPY config.js /usr/share/nginx/html/
-COPY styles.css /usr/share/nginx/html/
+# Copy all frontend files, including assets and images
+COPY . /usr/share/nginx/html/
 
-# Replace default Nginx configuration
+# Install the custom Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose HTTP port
+EXPOSE 80
